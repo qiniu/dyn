@@ -3,6 +3,8 @@ qiniupkg.com/dyn
 
 [![Build Status](https://travis-ci.org/qiniu/dyn.svg?branch=develop)](https://travis-ci.org/qiniu/dyn) [![GoDoc](https://godoc.org/qiniupkg.com/dyn?status.svg)](https://godoc.org/qiniupkg.com/dyn)
 
+[![Qiniu Logo](http://open.qiniudn.com/logo.png)](http://www.qiniu.com/)
+
 # 下载
 
 ```
