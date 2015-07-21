@@ -11,6 +11,8 @@ go get qiniupkg.com/dyn
 
 # 使用文档
 
+* [qiniupkg.com/dyn/cmdarg.v1](http://godoc.org/qiniupkg.com/dyn/cmdarg.v1)
+* [qiniupkg.com/dyn/cmdargs.v1](http://godoc.org/qiniupkg.com/dyn/cmdargs.v1)
 * [qiniupkg.com/dyn/dyn.v1](http://godoc.org/qiniupkg.com/dyn/dyn.v1)
 * [qiniupkg.com/dyn/jsonext.v1](http://godoc.org/qiniupkg.com/dyn/jsonext.v1)
 * [qiniupkg.com/dyn/proto.v1](http://godoc.org/qiniupkg.com/dyn/proto.v1)
