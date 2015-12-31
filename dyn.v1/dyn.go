@@ -23,7 +23,12 @@ func FieldByTag(cate string, sv reflect.Value, tagName string) (v reflect.Value)
 	for i := 0; i < sv.NumField(); i++ {
 		sf := st.Field(i)
 		tag := sf.Tag.Get(cate)
-		if TagName(tag) == tagName {
+		if tag == "" {
+			if sf.Name == tagName {
+				v = sv.Field(i)
+				return
+			}
+		} else if TagName(tag) == tagName {
 			v = sv.Field(i)
 			return
 		}
@@ -33,49 +38,11 @@ func FieldByTag(cate string, sv reflect.Value, tagName string) (v reflect.Value)
 
 // ----------------------------------------------------------
 
-func getCmdVal(data reflect.Value, cmd string) (v reflect.Value, ok bool) {
-
-	execCmd := data.MethodByName("ExecCmd") // v, err := this.ExecCmd(cmd)
-	if !execCmd.IsValid() {
-		if data.Kind() == reflect.Struct {
-			log.Warn("GetVal: method ExecCmd not foud -", reflect.TypeOf(data.Interface()))
-		}
-		return
-	}
-
-	in := []reflect.Value{reflect.ValueOf(cmd)}
-	out := execCmd.Call(in)
-	if len(out) > 1 {
-		if !out[1].IsNil() {
-			log.Warn("GetVal: ExecCmd failed -", cmd, out[1].Interface())
-			return
-		}
-	}
-	v, ok = out[0], true
-	return
-}
-
 func GetVal(cate string, data reflect.Value, key string) (v reflect.Value, ok bool) {
 
 	parts := strings.Split(key, ".")
 
 	for _, part := range parts {
-		if strings.HasPrefix(part, "`") {
-			n := len(part) - 1
-			if n < 1 || part[n] != '`' {
-				log.Warn("GetVal: invalid part -", part)
-				return
-			}
-			ok1 := false
-			if data.Kind() == reflect.Interface {
-				data = data.Elem()
-			}
-			if v, ok1 = getCmdVal(data, part[1:n]); !ok1 {
-				return
-			}
-			data = v
-			continue
-		}
 	retry:
 		kind := data.Kind()
 		switch kind {
@@ -89,7 +56,10 @@ func GetVal(cate string, data reflect.Value, key string) (v reflect.Value, ok bo
 		case reflect.Array, reflect.Slice:
 			index, err := strconv.Atoi(part)
 			if err != nil {
-				log.Warn("GetVal failed: unsupported index -", part)
+				log.Warn("GetVal failed: invalid index -", part)
+				return
+			}
+			if index >= data.Len() {
 				return
 			}
 			v = data.Index(index)
@@ -109,11 +79,7 @@ func GetVal(cate string, data reflect.Value, key string) (v reflect.Value, ok bo
 			return
 		}
 		if !v.IsValid() {
-			ok1 := false
-			if v, ok1 = getCmdVal(data, part); !ok1 {
-				log.Warn("GetVal failed: not found key -", part)
-				return
-			}
+			return
 		}
 		data = v
 	}

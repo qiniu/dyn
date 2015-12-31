@@ -16,16 +16,6 @@ func init() {
 type M map[string]interface{}
 type M2 map[string]interface{}
 
-func (p M) ExecCmd(cmd string) (int, error) {
-
-	return len(cmd), nil
-}
-
-func (p M2) ExecCmd(cmd string) int {
-
-	return len(cmd) * 2
-}
-
 func TestFuncGet(t *testing.T) {
 
 	c1 := 1
@@ -46,27 +36,7 @@ func TestFuncGet(t *testing.T) {
 		},
 	}
 
-	v1, ok := GetInt(data, "`abc`")
-	if !ok || v1 != 3 {
-		ts.Fatal(t, "`abc` not work", v1, ok)
-	}
-
-	v1, ok = GetInt(data, "abc")
-	if !ok || v1 != 3 {
-		ts.Fatal(t, "abc not work", v1, ok)
-	}
-
-	v2, ok := GetInt(data, "f.`abcd`")
-	if !ok || v2 != 8 {
-		ts.Fatal(t, "f.`abcd` not work", v2, ok)
-	}
-
-	v2, ok = GetInt(data, "f.abcd")
-	if !ok || v2 != 8 {
-		ts.Fatal(t, "f.`abcd` not work", v2, ok)
-	}
-
-	_, ok = Get(nil, "a")
+	_, ok := Get(nil, "a")
 	if ok {
 		ts.Fatal(t, "a?")
 	}
