@@ -10,15 +10,15 @@ import (
 	"github.com/qiniu/dyn/text"
 	"github.com/qiniu/x/log"
 
-	. "github.com/qiniu/dyn/proto"
+	"github.com/qiniu/dyn/proto"
 )
 
 const (
-	Fmttype_Invalid = -1
-	Fmttype_Json    = text.Fmttype_Json
-	Fmttype_Form    = text.Fmttype_Form
-	Fmttype_Text    = text.Fmttype_Text
-	Fmttype_Jsonstr = text.Fmttype_Jsonstr // 在json的字符串内
+	Fmttype_Invalid = proto.Fmttype_Invalid
+	Fmttype_Json    = proto.Fmttype_Json
+	Fmttype_Form    = proto.Fmttype_Form
+	Fmttype_Text    = proto.Fmttype_Text
+	Fmttype_Jsonstr = proto.Fmttype_Jsonstr
 )
 
 var (
@@ -132,7 +132,7 @@ func (p *Context) doMatch(vexp, vreal interface{}, field string) (err error) {
 		}
 		log.Debug("Match map object failed:", vexp, vreal)
 
-	case Var:
+	case proto.Var:
 		err2 := p.MatchVar(v.Key, vreal)
 		if err2 != nil {
 			if field == "" {
@@ -180,7 +180,7 @@ func (p *Context) doMatch(vexp, vreal interface{}, field string) (err error) {
 
 func (p *Context) Let(vexp, vreal interface{}) (err error) {
 
-	if v, ok := vexp.(Var); ok {
+	if v, ok := vexp.(proto.Var); ok {
 		p.DeleteVar(v.Key)
 		return p.Match(vexp, vreal)
 	}
@@ -210,7 +210,7 @@ func (p *Context) Subst(vexp interface{}, ft int) (vres interface{}, err error) 
 		vres, err = p.SubstText(v, ft)
 		return
 
-	case Var:
+	case proto.Var:
 		vres1, ok1 := dyn.Get(p.vars, v.Key)
 		if !ok1 {
 			return nil, errors.New("var `" + v.Key + "` not found")

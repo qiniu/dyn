@@ -1,2 +1,5 @@
 github.com/qiniu/x v8.0.0+incompatible h1:5KRlM4br8QjRrvQq8iZpu8V86tyP2ociSqbSVvAGz7E=
 github.com/qiniu/x v8.0.0+incompatible/go.mod h1:KpRKWYG/GaidPQVpoQ2Cvuvtts3gYnoo2PftgdmAiU4=
+qiniupkg.com/dyn v1.0.1 h1:VdNWFW0PdiBlohC/ZH2EPuu4WoRmiNxM7msD3DV/o0c=
+qiniupkg.com/dyn v1.0.1/go.mod h1:6p+RCv+0tqvnjLZxAbhe4+lBteqqfBytYynNqI5p7sA=
+qiniupkg.com/x v8.0.0+incompatible h1:SbuenQ7F/TwR1CQ1YwU9PlIltg55UNtnVw1mtEwsPPU=
