@@ -3,8 +3,8 @@ package dyn
 import (
 	"testing"
 
-	"qiniupkg.com/x/log.v7"
-	"qiniupkg.com/x/ts.v7"
+	"github.com/qiniu/x/log"
+	"github.com/qiniu/x/ts"
 )
 
 func init() {

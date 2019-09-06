@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"qiniupkg.com/dyn/vars.v1"
+	"github.com/qiniu/dyn/vars"
 )
 
 // ---------------------------------------------------------------------------
@@ -38,33 +38,33 @@ func TestParse(t *testing.T) {
 	cases := []caseParseArgs{
 		{
 			argsType: reflect.TypeOf((*retArgs)(nil)),
-			cmd: []string{"ret", "200"},
-			args: &retArgs{200},
-			err: nil,
+			cmd:      []string{"ret", "200"},
+			args:     &retArgs{200},
+			err:      nil,
 		},
 		{
 			argsType: reflect.TypeOf((*retArgs)(nil)),
-			cmd: []string{"ret", "$(code)"},
-			args: &retArgs{200},
-			err: nil,
+			cmd:      []string{"ret", "$(code)"},
+			args:     &retArgs{200},
+			err:      nil,
 		},
 		{
 			argsType: reflect.TypeOf((*retArgs)(nil)),
-			cmd: []string{"ret"},
-			args: &retArgs{0},
-			err: nil,
+			cmd:      []string{"ret"},
+			args:     &retArgs{0},
+			err:      nil,
 		},
 		{
 			argsType: reflect.TypeOf((*hostArgs)(nil)),
-			cmd: []string{"host", "api.qiniu.com", "192.168.1.10:8888"},
-			args: &hostArgs{"api.qiniu.com", "192.168.1.10:8888"},
-			err: nil,
+			cmd:      []string{"host", "api.qiniu.com", "192.168.1.10:8888"},
+			args:     &hostArgs{"api.qiniu.com", "192.168.1.10:8888"},
+			err:      nil,
 		},
 		{
 			argsType: reflect.TypeOf((*base64Args)(nil)),
-			cmd: []string{"base64", "-std", "hello"},
-			args: &base64Args{StdEncoding: true, Fdecode: false, Data: "hello"},
-			err: nil,
+			cmd:      []string{"base64", "-std", "hello"},
+			args:     &base64Args{StdEncoding: true, Fdecode: false, Data: "hello"},
+			err:      nil,
 		},
 	}
 
@@ -92,4 +92,3 @@ func setVar(t *testing.T, ctx *vars.Context, varName string, obj interface{}) {
 }
 
 // ---------------------------------------------------------------------------
-

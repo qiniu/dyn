@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"unsafe"
 
-	. "qiniupkg.com/dyn/proto.v1"
+	. "github.com/qiniu/dyn/proto"
 )
 
 // ----------------------------------------------------------
@@ -25,7 +25,7 @@ func encodeVar(e *encodeState, v reflect.Value, quoted bool) {
 func UnmarshalString(data string, v interface{}) error {
 
 	sh := *(*reflect.StringHeader)(unsafe.Pointer(&data))
-	arr := (*[1<<30]byte)(unsafe.Pointer(sh.Data))
+	arr := (*[1 << 30]byte)(unsafe.Pointer(sh.Data))
 	return Unmarshal(arr[:sh.Len], v)
 }
 
@@ -48,4 +48,3 @@ func MarshalIndentToString(v interface{}, prefix, indent string) (text string, e
 }
 
 // ----------------------------------------------------------
-

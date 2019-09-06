@@ -5,8 +5,8 @@ import (
 	"syscall"
 	"testing"
 
-	"qiniupkg.com/x/errors.v7"
-	"qiniupkg.com/x/ts.v7"
+	"github.com/qiniu/x/errors"
+	"github.com/qiniu/x/ts"
 )
 
 func execOld(exprvar string, data interface{}, ft int) (val string, err error) {
@@ -70,10 +70,10 @@ var data = map[string]interface{}{
 }
 
 type testCase struct {
-	expr            string
-	result          string
-	resultForm      string
-	resultText      string
+	expr       string
+	result     string
+	resultForm string
+	resultText string
 }
 
 var cases = []testCase{
@@ -109,4 +109,3 @@ func TestExpr(t *testing.T) {
 		ts.Fatal(t, "Subst failed:", err)
 	}
 }
-

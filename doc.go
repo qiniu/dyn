@@ -1,6 +1,5 @@
 package dyn
 
 import (
-	_ "qiniupkg.com/dyn/proto.v1"
+	_ "github.com/qiniu/dyn/proto"
 )
-

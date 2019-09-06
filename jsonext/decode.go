@@ -20,7 +20,7 @@ import (
 	"unicode/utf16"
 	"unicode/utf8"
 
-	. "qiniupkg.com/dyn/proto.v1"
+	. "github.com/qiniu/dyn/proto"
 )
 
 // Unmarshal parses the JSON-encoded data and stores the result
@@ -728,7 +728,7 @@ func (d *decodeState) literalStore(item []byte, v reflect.Value, fromQuoted bool
 		}
 
 	case '$': // item = $(var)
-		key := string(item[2:len(item)-1])
+		key := string(item[2 : len(item)-1])
 		value := Var{Key: key}
 		switch v.Kind() {
 		case reflect.Interface:
@@ -915,7 +915,7 @@ func (d *decodeState) literalInterface() interface{} {
 		return s
 
 	case '$': // $(var)
-		key := string(item[2:len(item)-1])
+		key := string(item[2 : len(item)-1])
 		return Var{Key: key}
 
 	default: // number

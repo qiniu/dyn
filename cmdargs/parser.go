@@ -8,17 +8,18 @@ import (
 	"strings"
 	"syscall"
 
-	"qiniupkg.com/x/jsonutil.v7"
-	"qiniupkg.com/x/log.v7"
-	"qiniupkg.com/dyn/cmdarg.v1"
-	. "qiniupkg.com/dyn/vars.v1"
+	"github.com/qiniu/dyn/cmdarg"
+	"github.com/qiniu/x/jsonutil"
+	"github.com/qiniu/x/log"
+
+	. "github.com/qiniu/dyn/vars"
 )
 
 var (
-	ErrParamsNotEnough = errors.New("params not enough")
-	ErrTooMuchParams = errors.New("too much params")
+	ErrParamsNotEnough     = errors.New("params not enough")
+	ErrTooMuchParams       = errors.New("too much params")
 	ErrUnsupportedFlagType = errors.New("unsupported flag type")
-	ErrUnsupportedArgType = errors.New("unsupported argument type")
+	ErrUnsupportedArgType  = errors.New("unsupported argument type")
 )
 
 // ---------------------------------------------------------------------------
@@ -95,9 +96,12 @@ type parseArgOpts struct {
 func getFmttype(ft string, ftDefault int) int {
 
 	switch ft {
-	case "form": return Fmttype_Form
-	case "text": return Fmttype_Text
-	case "json": return Fmttype_Json
+	case "form":
+		return Fmttype_Form
+	case "text":
+		return Fmttype_Text
+	case "json":
+		return Fmttype_Json
 	}
 	return ftDefault
 }
@@ -302,4 +306,3 @@ func Parse(
 }
 
 // ---------------------------------------------------------------------------
-

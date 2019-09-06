@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"qiniupkg.com/x/jsonutil.v7"
+	"github.com/qiniu/x/jsonutil"
 )
 
 // ---------------------------------------------------------------------------
@@ -22,31 +22,31 @@ func TestMatchVar(t *testing.T) {
 
 	cases := []caseMatchVar{
 		{
-			Key: `a.b`,
-			RealVal: `{"value": 1}`,
-			Err: nil,
-			OldDom: `{}`,
+			Key:         `a.b`,
+			RealVal:     `{"value": 1}`,
+			Err:         nil,
+			OldDom:      `{}`,
 			ExpectedDom: `{"a": {"b": {"value": 1}}}`,
 		},
 		{
-			Key: `a.b`,
-			RealVal: `{"value": 1}`,
-			Err: errors.New("unmatched field: `value`"),
-			OldDom: `{"a": {"b": {"value": 2}}}`,
+			Key:         `a.b`,
+			RealVal:     `{"value": 1}`,
+			Err:         errors.New("unmatched field: `value`"),
+			OldDom:      `{"a": {"b": {"value": 2}}}`,
 			ExpectedDom: `{"a": {"b": {"value": 2}}}`,
 		},
 		{
-			Key: `a.b`,
-			RealVal: `{"value": 1}`,
-			Err: ErrUnmatchedValue,
-			OldDom: `{"a": "123"}`,
+			Key:         `a.b`,
+			RealVal:     `{"value": 1}`,
+			Err:         ErrUnmatchedValue,
+			OldDom:      `{"a": "123"}`,
 			ExpectedDom: `{"a": "123"}`,
 		},
 		{
-			Key: `a.b`,
-			RealVal: `{"value": {"37": "64"}}`,
-			Err: nil,
-			OldDom: `{"a": {}, "c": 1.2}`,
+			Key:         `a.b`,
+			RealVal:     `{"value": {"37": "64"}}`,
+			Err:         nil,
+			OldDom:      `{"a": {}, "c": 1.2}`,
 			ExpectedDom: `{"a": {"b": {"value": {"37": "64"}}}, "c": 1.2}`,
 		},
 	}
@@ -80,4 +80,3 @@ func TestMatchVar(t *testing.T) {
 }
 
 // ---------------------------------------------------------------------------
-

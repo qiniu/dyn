@@ -7,9 +7,9 @@ import (
 	"syscall"
 	"unicode/utf8"
 
-	"qiniupkg.com/dyn/dyn.v1"
-	"qiniupkg.com/dyn/text.v1/internal/encoding/json"
-	"qiniupkg.com/x/errors.v7"
+	"github.com/qiniu/dyn/dyn"
+	"github.com/qiniu/dyn/text/internal/encoding/json"
+	"github.com/qiniu/x/errors"
 )
 
 const (
@@ -215,4 +215,3 @@ func Subst(exprvar string, data interface{}, ft int, failIfNotExists bool) (v st
 }
 
 // ----------------------------------------------------------
-

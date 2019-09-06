@@ -6,11 +6,11 @@ import (
 	"strconv"
 	"strings"
 
-	"qiniupkg.com/dyn/dyn.v1"
-	"qiniupkg.com/dyn/text.v1"
-	"qiniupkg.com/x/log.v7"
+	"github.com/qiniu/dyn/dyn"
+	"github.com/qiniu/dyn/text"
+	"github.com/qiniu/x/log"
 
-	. "qiniupkg.com/dyn/proto.v1"
+	. "github.com/qiniu/dyn/proto"
 )
 
 const (
@@ -22,8 +22,8 @@ const (
 )
 
 var (
-	ErrNotVar = errors.New("assign to a non variable expression")
-	ErrUnmatchedValue = errors.New("unmatched value")
+	ErrNotVar           = errors.New("assign to a non variable expression")
+	ErrUnmatchedValue   = errors.New("unmatched value")
 	ErrSliceLenNotEqual = errors.New("slice length not equal")
 )
 
@@ -95,7 +95,7 @@ func (p *Context) MatchVar(key string, vreal interface{}) (err error) {
 			return nil
 		}
 		v = make(map[string]interface{})
-		v1[part] = v		
+		v1[part] = v
 	}
 
 	return p.Match(v, vreal)
@@ -119,7 +119,7 @@ func (p *Context) doMatch(vexp, vreal interface{}, field string) (err error) {
 			}
 			for sk, sv := range v {
 				if sv2, ok2 := v2[sk]; ok2 {
-					err = p.doMatch(sv, sv2, sfield + sk)
+					err = p.doMatch(sv, sv2, sfield+sk)
 					if err == nil {
 						continue
 					}
@@ -154,7 +154,7 @@ func (p *Context) doMatch(vexp, vreal interface{}, field string) (err error) {
 				sfield += "."
 			}
 			for i, sv := range v {
-				err = p.doMatch(sv, v2.Index(i).Interface(), sfield + strconv.Itoa(i))
+				err = p.doMatch(sv, v2.Index(i).Interface(), sfield+strconv.Itoa(i))
 				if err != nil {
 					return
 				}
@@ -240,4 +240,3 @@ func (p *Context) SubstText(exprvar string, ft int) (v string, err error) {
 }
 
 // ---------------------------------------------------------------------------
-

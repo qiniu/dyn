@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"qiniupkg.com/x/log.v7"
+	"github.com/qiniu/x/log"
 )
 
 // ----------------------------------------------------------

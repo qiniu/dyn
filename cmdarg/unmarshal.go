@@ -3,7 +3,7 @@ package cmdarg
 import (
 	"strings"
 
-	"qiniupkg.com/dyn/jsonext.v1"
+	"github.com/qiniu/dyn/jsonext"
 )
 
 // ---------------------------------------------------------------------------
@@ -30,9 +30,12 @@ func Unmarshal(text string) (v interface{}, err error) {
 
 	if c >= 'a' && c <= 'z' {
 		switch text {
-		case "true": return true, nil
-		case "false": return false, nil
-		case "null": return nil, nil
+		case "true":
+			return true, nil
+		case "false":
+			return false, nil
+		case "null":
+			return nil, nil
 		default:
 			return text, nil
 		}
@@ -43,4 +46,3 @@ func Unmarshal(text string) (v interface{}, err error) {
 }
 
 // ---------------------------------------------------------------------------
-
