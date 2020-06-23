@@ -1,6 +1,7 @@
 package text
 
 import (
+	"fmt"
 	"net/url"
 	"strconv"
 	"strings"
@@ -125,7 +126,7 @@ func GetAsString(data interface{}, key string, ft int, failIfNotExists bool) (va
 	v, ok := dyn.Get(data, key)
 	if !ok {
 		if failIfNotExists {
-			return "", errors.New("dyn.Get key `" + key + "` not found")
+			return "", fmt.Errorf("dyn.Get key `%s`: %w", key, syscall.ENOENT)
 		}
 		return AsString(nil, ft)
 	}

@@ -105,7 +105,7 @@ func TestExpr(t *testing.T) {
 		}
 	}
 	_, err := Subst("abc=${e}&dee", data, Fmttype_Form, true)
-	if !(err != nil && err.Error() == "dyn.Get key `e` not found") {
+	if !errors.Is(err, syscall.ENOENT) {
 		ts.Fatal(t, "Subst failed:", err)
 	}
 }

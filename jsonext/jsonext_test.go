@@ -30,4 +30,3 @@ func TestExt(t *testing.T) {
 		t.Fatal("v != v2 -", v, v2)
 	}
 }
-

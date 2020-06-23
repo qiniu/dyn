@@ -10,7 +10,7 @@ import (
 func ToBytes(data string) []byte {
 
 	sh := *(*reflect.StringHeader)(unsafe.Pointer(&data))
-	arr := (*[1<<30]byte)(unsafe.Pointer(sh.Data))
+	arr := (*[1 << 30]byte)(unsafe.Pointer(sh.Data))
 	return arr[:sh.Len]
 }
 
@@ -22,4 +22,3 @@ func ToString(data []byte) string {
 }
 
 // ----------------------------------------------------------
-
